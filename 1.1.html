@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Stuck extends Array {
+      constructor(name) {
+        super(name)
+        this.stuckData = []
+        this.stuckMin = []
+      }
+      push(item) {
+        const stuckMin = this.stuckMin
+        const stuckData = this.stuckData
+        stuckData.push(item)
+        if(stuckMin.length === 0) { stuckMin.push(item) }
+        else if(item > stuckMin.at(-1)) { stuckMin.push(stuckMin.at(-1)) }
+        else { stuckMin.push(item) }
+      }
+      pop(item) {
+        const stuckMin = this.stuckMin
+        const stuckData = this.stuckData
+        stuckMin.pop()
+        return stuckData.pop()
+      }
+      getMin(){
+        return this.stuckMin.at(-1)
+      }
+    }
+    const m = new Stuck()
+    m.push(9)
+    m.push(2)
+    m.push(3)
+    m.push(4)
+    m.push(5)
+
+    console.log(m.pop(),m.getMin());
+  </script>
+</body>
+</html>
+
