@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //由两个栈组成的队列
+    class Queue {
+      constructor(name) {
+        this.stuck1 = []
+        this.stuck2 = []
+      }
+      add(item) {
+        this.stuck1.push(item)
+      }
+      poll() {
+        const stuck2 = this.stuck2
+        const stuck1 = this.stuck1
+        if(stuck2.length > 0) {
+          return stuck2.pop()
+        }else {
+          const num = stuck1.length
+          for(let i=0; i < num; i++){
+            let m =stuck1.pop()
+            stuck2.push(m)
+          }
+          if(stuck2.length == 0){ return undefined }
+          return stuck2.pop()          
+        }
+      }
+    }
+    let queue = new Queue()
+    queue.add(1)
+    queue.add(2)
+    queue.add(3)
+    console.log(queue.poll());
+    queue.add(3)
+
+  </script>
+</body>
+</html>
