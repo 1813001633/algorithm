@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //题目:用递归函数和栈操作逆序一个栈
+    //弹出并获取栈底元素 在递归调用前弹出元素保存到作用域，在递归调用最底层返回元素，在递归调用后将弹出的元素push到stuck中
+    //画递归调用图可分为递归函数调用前的部分与后的部分
+    function getAndRemoveElement(stuck) {
+      let result = stuck.pop()
+      if(stuck.length === 0) {
+        return result
+      } else {
+        let last = getAndRemoveElement(stuck)
+        stuck.push(result)
+        return last
+      }
+    }
+    function reverse(stuck) {
+      if(stuck.length === 0){
+        return
+      }
+      let result = getAndRemoveElement(stuck)
+      reverse(stuck)
+      stuck.push(result)
+    }
+    let stuck1 = [1,2,3,4]
+    reverse(stuck1)
+    console.log(stuck1);
+  </script>
+</body>
+</html>
